@@ -7,14 +7,16 @@ namespace Coffee_Shop_Registration.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly RecordStoreContext _recordStoreContext;
+        public HomeController(ILogger<HomeController> logger, RecordStoreContext newRecordStoreContext)
         {
             _logger = logger;
+            _recordStoreContext = newRecordStoreContext;
         }
 
         public IActionResult Index()
         {
+            var prcount = _recordStoreContext.Products.Count();
             return View();
         }
         public IActionResult Registration()
